@@ -1,19 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // import React from 'react'
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGetProducts } from "../hooks/useGetProducts"
 
 function Pagination() {
     const {products,getProducts} = useGetProducts();
+    const [i, setI] = useState(0);
 
     useEffect(() => {
         getProducts();
     }, []);
     
-    let i = 0;
 
     const PageProducts = products.slice(i, i + 5);
+
+    const handleNext = () => {
+        if(i+5 < products.length){
+            setI(i+5);
+        }
+
+    }
+    const handlePrev = () => {
+        if(i > 0){
+            setI(i-5);
+        }
+    }
+
+
 
 
   return (
@@ -36,8 +50,12 @@ function Pagination() {
         )}
 
         <div className="mt-10 flex justify-between w-1/3">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Previous</button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Next</button>
+            <button 
+            onClick={handlePrev}
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Previous</button>
+            <button 
+            onClick={handleNext}
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Next</button>
         </div>
     </div>
   )

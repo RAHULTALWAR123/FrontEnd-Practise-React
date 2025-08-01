@@ -31,7 +31,7 @@ function Pagination() {
 
 
   return (
-    <div className="p-10 m-10 flex flex-col items-center justify-center">
+    <div className="p-20 flex flex-col items-center justify-center">
         {products.length > 0 ? (
             <>
             {PageProducts?.map((p) => (

@@ -33,7 +33,7 @@ function Form() {
             setErrors((prev) => ({...prev, password: true}));
         }
     }
-
+ 
   return (
     <div className="text-center p-20">
         <form className="flex flex-col items-center justify-center gap-4">

@@ -5,6 +5,7 @@ import Timer from "./components/Timer"
 import Form from "./components/Form"
 import { useThemeStore } from "./stores/useThemeStore"
 import { useEffect } from "react"
+import Dropdown from "./components/Dropdown"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Page" element= {<Pagination/>} />
         <Route path="/time" element= {<Timer/>} />
         <Route path="/form" element= {<Form/>} />
+        <Route path="/dropdown" element= {<Dropdown/>} />
       </Routes>
     </BrowserRouter>
 

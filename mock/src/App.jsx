@@ -6,6 +6,7 @@ import Form from "./components/Form"
 import { useThemeStore } from "./stores/useThemeStore"
 import { useEffect } from "react"
 import Dropdown from "./components/Dropdown"
+import Accordian from "./components/Accordian"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/time" element= {<Timer/>} />
         <Route path="/form" element= {<Form/>} />
         <Route path="/dropdown" element= {<Dropdown/>} />
+        <Route path="/accordian" element= {<Accordian/>} />
       </Routes>
     </BrowserRouter>
 

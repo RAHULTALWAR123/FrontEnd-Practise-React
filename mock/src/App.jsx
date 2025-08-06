@@ -7,6 +7,9 @@ import { useThemeStore } from "./stores/useThemeStore"
 import { useEffect } from "react"
 import Dropdown from "./components/Dropdown"
 import Accordian from "./components/Accordian"
+import Test from "./components/Test"
+import Search from "./components/Search"
+import Photos from "./components/Photos"
 
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
         <Route path="/form" element= {<Form/>} />
         <Route path="/dropdown" element= {<Dropdown/>} />
         <Route path="/accordian" element= {<Accordian/>} />
+        <Route path="/test" element = {<Test/>} />
+        <Route path="/search" element = {<Search/>} />
+        <Route path="/photos" element = {<Photos/>} />
       </Routes>
     </BrowserRouter>
 

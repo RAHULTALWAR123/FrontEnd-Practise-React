@@ -11,7 +11,7 @@ function Timer() {
         if (intervalRef.current) return;
     
         intervalRef.current = setInterval(() => {
-            setTime(prevTime => prevTime + 1);
+            setTime((prev) => (prev + 1));
         }, 1000);
 
 

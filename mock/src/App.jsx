@@ -10,6 +10,7 @@ import Accordian from "./components/Accordian"
 import Test from "./components/Test"
 import Search from "./components/Search"
 import Photos from "./components/Photos"
+import Gift from "./components/Gift"
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/test" element = {<Test/>} />
         <Route path="/search" element = {<Search/>} />
         <Route path="/photos" element = {<Photos/>} />
+        <Route path="/gift" element = {<Gift/>} />
       </Routes>
     </BrowserRouter>
 

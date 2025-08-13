@@ -11,6 +11,7 @@ import Test from "./components/Test"
 import Search from "./components/Search"
 import Photos from "./components/Photos"
 import Gift from "./components/Gift"
+import Progress from "./components/Progress"
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+
+  const progress =4; 
 
   return (
     <div className="min-h-screen">
@@ -34,7 +37,8 @@ function App() {
         <Route path="/search" element = {<Search/>} />
         <Route path="/photos" element = {<Photos/>} />
         <Route path="/gift" element = {<Gift/>} />
-      </Routes>
+        <Route path="/progress" element = {<Progress progress={progress}/>} />
+      </Routes> 
     </BrowserRouter>
 
     </div>

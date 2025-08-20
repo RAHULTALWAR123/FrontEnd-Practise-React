@@ -12,6 +12,7 @@ import Search from "./components/Search"
 import Photos from "./components/Photos"
 import Gift from "./components/Gift"
 import Progress from "./components/Progress"
+import Otp from "./components/Otp"
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/photos" element = {<Photos/>} />
         <Route path="/gift" element = {<Gift/>} />
         <Route path="/progress" element = {<Progress progress={progress}/>} />
+        <Route path="/otp" element={<Otp/>} />
       </Routes> 
     </BrowserRouter>
 

@@ -2,6 +2,8 @@ import { useState } from "react";
 
 export const useGetProducts = () => {
     const [products, setProducts] = useState([]);
+    const [allProducts,setAllProducts] = useState([]);
+
     const getProducts = async() => {
         try {
             const res  = await fetch("https://dummyjson.com/products");
@@ -12,6 +14,20 @@ export const useGetProducts = () => {
             console.error("Error fetching products:", error);
         }
     }
-    return {products,getProducts };
+
+    const getAllProducts = async() => {
+        try{
+
+            const res = await fetch("https://fakestoreapi.com/products");
+            const data = await res.json();
+            console.log(data);
+            setAllProducts(data);
+        }
+        catch(err){
+            console.error("Error fetching products:", err);
+        }
+    }
+
+    return {products,getProducts,getAllProducts,allProducts,setAllProducts };
 
 }

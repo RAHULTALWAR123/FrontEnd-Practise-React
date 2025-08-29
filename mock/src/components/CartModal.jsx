@@ -4,6 +4,8 @@ import { useCartStore } from "../stores/useCartStore";
 
 function CartModal({setShowCartModal}) {
     const {cart,deleteCart} = useCartStore();
+
+
   return (
    <div className="fixed inset-0 bg-black/80 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-gray-900 text-center p-10 m-10 w-1/2 mx-auto rounded-lg relative overflow-y-auto max-h-[80vh]">

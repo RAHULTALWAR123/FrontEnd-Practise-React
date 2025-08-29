@@ -2,7 +2,15 @@ import {create} from 'zustand';
 
 
 export const useCartStore = create((set) => ({
-    cart : [],
-    addCart : (item) => set((state) => ({cart : [...state.cart,item]})),
-    deleteCart : (id) => set((state) => ({cart : state.cart.filter(item => item.id !== id)})),
+    cart : JSON.parse(localStorage.getItem('my-cart')) || [],
+    addCart : (item) => set((state) => {
+        const newCart = [...state.cart,item];
+        localStorage.setItem('my-cart',JSON.stringify(newCart));
+        return {cart : newCart};
+    }),
+    deleteCart : (id) => set((state) => {
+        const updatedCart = state.cart.filter((c) => c.id !== id);
+        localStorage.setItem('my-cart',JSON.stringify(updatedCart));
+        return {cart : updatedCart};
+    }),
 }))

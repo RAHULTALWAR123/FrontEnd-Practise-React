@@ -14,6 +14,7 @@ import Progress from "./components/Progress"
 import Otp from "./components/Otp"
 import ProductFiltering from "./components/ProductFiltering"
 import SearchSuggestion from "./components/SearchSuggestion"
+import Test1 from "./components/test1"
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/progress" element = {<Progress progress={progress}/>} />
         <Route path="/otp" element={<Otp/>} />
         <Route path="/products" element={<ProductFiltering/>} />
+        <Route path="/testing" element={<Test1/>} />
       </Routes> 
     </BrowserRouter>
 

@@ -1,22 +1,18 @@
-import { useState } from "react";
+import { useMemo } from "react"; 
 
 function Test() {
-    const [count, setCount] = useState(0);
 
-    // useEffect(() => {
-        const timer = setInterval(() => {
-            console.log("Hello");
-        }, 1000);
+  const array = [1,2,3,4,5];
 
-        setTimeout(() => {
-            clearInterval(timer);
-        }, 5000);
-    // });
+  const even = useMemo(() => {
+    return array.filter((num) => num % 2 === 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
+  console.log(even);
 
   return (
-    <div>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded " onClick={() => setCount(count + 1)}>{count}</button>
-    </div>
+    <></>
   )
 }
 

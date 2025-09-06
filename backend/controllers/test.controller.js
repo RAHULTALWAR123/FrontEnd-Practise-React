@@ -1,3 +1,4 @@
+import { json } from "express";
 import { generateTokenAndSetCookie } from "../cookie/cookie.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
@@ -127,3 +128,88 @@ export const getSlots = async(req,res) =>{
         console.log({message : err.message});
     }
 }
+
+export const BookSlot = async(req,res) => {
+    try {
+        const {profid,slotid} = req.params;
+
+        const professor = await User.findById(profid);
+        if(!professor){
+            return res.status(404).json({message : "prof not found"});
+        }
+
+        if(professor.role != "professor"){
+            return res.status(400).json({message : "invalid professor"});
+        }
+
+        const user = await User.findById(req.user._id);
+        if(!user){
+            return res.status(404).json({message : "user not found"});
+        }
+
+        if(user._id.toString() === professor._id.toString()){
+            return res.status(400).json({message :"cant book with urself"});  
+        }
+
+        const SelectedSlot = professor.slots.find((s) => (s._id.toString() == slotid))
+
+          if (!SelectedSlot) {
+      return res.status(404).json({ message: "slot not found" });
+    }
+
+    if (SelectedSlot.isBooked) {
+      return res.status(400).json({ message: "slot already booked" });
+    }
+
+
+        SelectedSlot.isBooked = true;
+        await professor.save();
+
+
+        user.appointments.push({
+            date : SelectedSlot.date,
+            professorId : professor._id,
+        })
+
+        await user.save();
+
+        return res.status(200).json({
+            message: "Slot booked successfully",
+            appointment: {
+                date: SelectedSlot.date,
+                professor: professor.name,
+            },
+        });
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// export const CancelAppointment = async(req,res) => {
+//     try {
+//         const {appid} = req.params;
+        
+//         const professor = await User.findById(req.user._id);
+//         if(!professor){
+//             return res.status(404).json({message : "professor not found"});
+//         }
+
+//         const users = await User.find({role : 'student'});
+//         if(users.length === 0){
+//             return res.status(404).json({message : "no students available"})
+//         }
+
+//         const appointment = users.map((u) => u.appointments.find((app) => app._id.toString() === appid));
+
+//         if(!appointment){
+//             return res.status(404).json({message :"appointment not found"});
+//         }
+
+//         appointment.status = "cancelled";
+
+
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }

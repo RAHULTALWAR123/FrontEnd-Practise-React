@@ -9,4 +9,4 @@ export const useThemeStore = create((set) => ({
         return {theme: newTheme};
     }),
 
-}));
+})); 

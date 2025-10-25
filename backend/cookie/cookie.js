@@ -14,3 +14,21 @@ export const generateTokenAndSetCookie = (userId,res) => {
 
     return token;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

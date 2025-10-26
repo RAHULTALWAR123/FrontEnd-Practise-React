@@ -83,133 +83,31 @@ export const logout = async(req,res) => {
 
 }
 
-export const PostSlots = async(req,res) => {
-    try{
-
-        const {dates} = req.body;
-        
-        if(dates.length === 0){
-            return res.status(400).json({message:"dates not found"});
-        }
-        
-        const user = await User.findById(req.user._id);
-    if(!user){
-        return res.status(400).json({message : "user not found"});
-    }
-
-    dates.forEach((d) =>(
-        user.slots.push({date : d})
-    ))
-    
-    await user.save();
-    
-    return res.status(201).json({user});
-}
-catch(err){
-    console.log(err.message);
-}
-}
-
-export const getSlots = async(req,res) =>{
-    try{
-        const {id} = req.params;
-        const prof = await User.findById(id);
-        if(!prof){
-            return res.status(400).json({message : "prof not found"});
-        }
-        
-        if(prof.role != "professor"){
-            return res.status(400).json({message : "user is not professor"});
-        }
-        
-        return res.status(200).json(prof.slots);
-    }
-    catch(err){
-        console.log({message : err.message});
-    }
-}
-
-export const BookSlot = async(req,res) => {
+export const paginate = async(req,res) => {
     try {
-        const {profid,slotid} = req.params;
+        // const {page,limit} = req.query;
+        const page  = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 5;
 
-        const professor = await User.findById(profid);
-        if(!professor){
-            return res.status(404).json({message : "prof not found"});
-        }
+        const skip = (page -1)* limit;
 
-        if(professor.role != "professor"){
-            return res.status(400).json({message : "invalid professor"});
-        }
+        const users = await User.find().skip(skip).limit(limit)
 
-        const user = await User.findById(req.user._id);
-        if(!user){
-            return res.status(404).json({message : "user not found"});
-        }
-
-        if(user._id.toString() === professor._id.toString()){
-            return res.status(400).json({message :"cant book with urself"});  
-        }
-
-        const SelectedSlot = professor.slots.find((s) => (s._id.toString() == slotid))
-
-          if (!SelectedSlot) {
-      return res.status(404).json({ message: "slot not found" });
-    }
-
-    if (SelectedSlot.isBooked) {
-      return res.status(400).json({ message: "slot already booked" });
-    }
-
-
-        SelectedSlot.isBooked = true;
-        await professor.save();
-
-
-        user.appointments.push({
-            date : SelectedSlot.date,
-            professorId : professor._id,
-        })
-
-        await user.save();
-
-        return res.status(200).json({
-            message: "Slot booked successfully",
-            appointment: {
-                date: SelectedSlot.date,
-                professor: professor.name,
-            },
-        });
-
+        return res.json(users);
     } catch (error) {
         console.log(error.message);
+        res.status(500).json({error : error.message});
     }
 }
 
-// export const CancelAppointment = async(req,res) => {
-//     try {
-//         const {appid} = req.params;
+export const getSearchUsers = async(req,res) => {
+    try {
+        const {name} = req.query;
+
+        const users = await User.find({name : {$regex : name,$options : "i"}}).limit(10);
+
+        return res.json(users);
+    } catch (error) {
         
-//         const professor = await User.findById(req.user._id);
-//         if(!professor){
-//             return res.status(404).json({message : "professor not found"});
-//         }
-
-//         const users = await User.find({role : 'student'});
-//         if(users.length === 0){
-//             return res.status(404).json({message : "no students available"})
-//         }
-
-//         const appointment = users.map((u) => u.appointments.find((app) => app._id.toString() === appid));
-
-//         if(!appointment){
-//             return res.status(404).json({message :"appointment not found"});
-//         }
-
-//         appointment.status = "cancelled";
-
-
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
+    }
+}

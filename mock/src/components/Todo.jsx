@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 
 import { useEffect } from "react";
 import { useState } from "react"
@@ -53,4 +53,56 @@ function Todo() {
 }
 
 export default Todo
+
+
+
+// import React, { useEffect, useState } from 'react'
+
+// function Todo() {
+//   const [field,setField] = useState("");
+//   const [todos,setTodos] = useState([]);
+
+//   useEffect(() => {
+//     const saved = JSON.parse(localStorage.getItem("local-todo")) || [];
+//     setTodos(saved)
+//   },[])
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     setTodos([...todos,field]);
+//     localStorage.setItem("local-todo",JSON.stringify([...todos,field]));
+//     console.log(field);
+//   }
+
+//   const handleDelete = (id) => {
+//     const filteredTodo = todos.filter((_,i) => i != id);
+//     localStorage.setItem("local-todo",filteredTodo);
+//     setTodos(filteredTodo);
+//   }
+
+//   return ( 
+//     <div className='p-10'>
+//     <div className='text-center '>
+//       <h1 className='text-4xl'>hello this is my todo</h1>
+//       <p className='text-md'>start adding tasks !!</p>
+//     </div>
+
+//     <div className='flex items-center justify-center'>
+//       <input type="text" value={field} onChange={(e) => setField(e.target.value)} placeholder='enter your todo' className='w-[30%] border rounded-2xl px-5 py-2' />
+//       <button onClick={handleSubmit} className='p-5 rounded-2xl'>add</button> 
+//     </div>
+
+//     {todos?.length > 0 ? todos?.map((t,i) => (
+//       <div key={i} className='flex justify-between items-center mt-10'>
+//       <p className='text-md text-blue-400'>{t}</p>
+//       <button onClick={() => handleDelete(i)} className='p-4 bg-blue-700 text-white'>Delete</button>
+//     </div>
+//     )) : (
+//       <p>no todos yet, add a new todo</p>
+//     )}
+//     </div>
+//   )
+// }
+
+// export default Todo
 

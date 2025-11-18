@@ -33,7 +33,8 @@ function HooksTest() {
   }
 
     // use memo
-    const [numbers] = [1,2,3,4,5,6,7,8,9,10];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const numbers = [1,2,3,4,5,6,7,8,9,10];
 
     const even = useMemo(() => {
         return  numbers.filter((n) => n % 2 == 0)
